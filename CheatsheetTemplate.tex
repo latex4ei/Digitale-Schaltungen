@@ -74,9 +74,9 @@ Verstärkung: \framebox{
 \textbf{nMos} (p-dotiertes Substrat, n-dotierte Drain/Source), schlechter pull up (Pegeldegenerierung)
 \begin{equation*}
 \!\!\! I_d = \begin{cases}
-0, &\text{ für }  U_{gs} - U_{th} \le 0 \qquad \qquad  \text{(Sperrber.)}\\[0.2em]
-\beta [(u_{gs} - U_{th}) \cdot u_{ds} - \frac{1}{2} u_{ds}^2] , &\text{ für }  0 \le U_{gs} - U_{th} \ge u_{ds} \  \text{(linearer Ber.)}\\\\[0.2em]
-\frac{1}{2} \beta \cdot (u_{gs} - U_{th})^2, &\text{ für }  0 \le U_{gs} - U_{th} \le u_{ds} \  \text{(Sättigungsber.)}\\
+0, &\text{ für }  U_{gs} - U_{th} \le 0\\[0.2em]
+\beta [(u_{gs} - U_{th}) \cdot u_{ds} - \frac{1}{2} u_{ds}^2] , &\text{ für }  0 \le U_{gs} - U_{th} \ge u_{ds}\\\\[0.2em]
+\frac{1}{2} \beta \cdot (u_{gs} - U_{th})^2, &\text{ für }  0 \le U_{gs} - U_{th} \le u_{ds}\\
 \end{cases}
 \end{equation*}
 \textbf{pMos} (n-dotiertes Substrat, p-dotierte Drain/Source), schlechter pull down (Pegeldegenerierung)
@@ -91,14 +91,16 @@ Verstärkung: \framebox{
 
 \section{Sequentielle Logik}
 
-\begin{tabular}{c|l}
+\begin{tabular}{rl}
 	$t_{\text{Setup}}$ & Stabilitätszeit vor der aktiven Taktflanke\\
 	$t_{\text{hold}}$ & Stabilitätszeit nach  der aktiven Taktflanke\\
-	$t_{\text{c2q}}$ & Eingang wird spätestens nach $t_{c2q}$ am Ausgang verfügbar\\
+	$t_{\text{c2q}}$ & Eingang spätestens nach $t_{c2q}$ am Ausgang verfügbar\\
 	Min. Taktperiode &  $t_{clk} \ge t_{1,c2q} + t_{logic,max} + t_{2,setup}$ \\
-	 & (bei Verletzung: Pipelinestufe einfügen, aber dadurch höhere Latenz) \\
+	 & (bei Verletzung: neue Pipelinestufe\\
+	 & aber dadurch höhere Latenz) \\
 	Max. Taktfrequenz & $f_{max} = \left\lfloor \frac{1}{t_{clk}} \right\rfloor$ \qquad (Nicht aufrunden) \\
-	Holdzeitbedingung & $t_{hold} \le t_{c2q} + t_{logic,min}$  $\ra$ (bei Verletzung zwei Inverter einfügen)\\
+	Holdzeitbedingung & $t_{hold} \le t_{c2q} + t_{logic,min}$\\
+	 & (bei Verletzung zwei Inverter einfügen)\\
 	Durchsatz & $\frac{1 \text{Sample}}{t_{clk,pipe}} = f$ \\
 	Latenz & $t_{clk} \cdot \#$Pipelinestufen (das zwischen den FFs) \\
 \end{tabular}
@@ -131,7 +133,7 @@ Diese setzen sich wie folgt zusammen:
 \end{itemize}
 
 \subsubsection{Elmore-Delay}
-Es müssen alle Kapazitäten berücksichtigt werden und alle Widerstände auf gemeinsamen Pfaden. Hier sollen dann die RC Konstanten aufaddiert werden.\\
+Es müssen alle Kapazitäten berücksichtigt werden und alle Widerstände auf gemeinsamen Pfaden. Es sollen dann die RC Konstanten aufaddiert werden.\\
 Beispiel: $\tau = R_C\cdot C_2 + (R_C+R_B)C_1+(R_C+R_B+R_A)C_L$
 %TODO Bild aus VL einfügen
 
@@ -265,6 +267,82 @@ Single Event Upset: Übernahme eines falschen Wertes durch Umkippen in ein FlipF
 \textbf{Transiente Maskierung:} Logische Maskierung an späterer Stufe verhindert falsche Ausbreitung\\
 
 \section{Synchrone und Ansynchrone Schaltungen}
+\subsection{Synchrone Schaltungen}
+Taktverteilung meistens durch H-Baumstruktur, um alle Register in gleicher Zeit zu erreichen.\\
+Taktabweichungen durch:
+\begin{itemize}
+	\item Clock-Generation
+	\item Devices
+	\item Interconnect
+	\item Temperatur
+	\item Kapazitive Lasten
+	\item Koppelkapazität zu benachbarten Leitungen
+\end{itemize}
+
+\begin{tablebox}{l|l}
+	Clock-Skew & Clock-Jitter\\
+	\brule
+	Örtlicher Unterschied & Zeitliche Unterschiede \\
+	zw. Regionen & zw. aufeinanderfolgenden Taktflanken\\
+	\hline
+	Einsatz zur Verteilung der Stromlast & \\
+	auf größeren Zeitraum & \\
+	$\Rightarrow$ Verkleinerung des IR-Drops & \\
+	\hline
+	Ausgleich von Unterschieden & \\
+	bei Pipelinestufen & \\
+\end{tablebox}
+
+\subsection{Asynchrone Schaltungen}
+Wie kann man einen sinnvollen Zeitpunkt finden um das Ergebnis aus einem asynchronen Zweig in ein Register zu übernehmen?\\
+\begin{itemize}
+	\item Delay-Modul mit fester Zeit (start/done)\\
+	\item Handshake-Protokoll mit redundanter Codierung (aber ständiger Querstrom!)
+	\item Handshake-Protokoll mit Stromsensor (falls kein Strom mehr fließt $\rightarrow$ Schaltung fertig)
+\end{itemize}
+
+\subsection{Kombination von asynchronen und synchronen Schaltungen}
+
+\begin{tablebox}{l|l}
+	Synchrone Schaltung & Asynchrone Schaltung\\
+	\brule
+	+ einfache Timing-Analyse & + schneller \\
+	+ einfache Verifikation & + keine glob. Taktverteilung\\
+	\hline
+	- glob. Taktverteilung & - schwierige Verifikation\\
+	 & - keine Timing-Analyse\\
+\end{tablebox}
+
+Synchronisierung durch:
+\begin{itemize}
+	\item asynchroner FIFO-Speicher mit Füllstandsüberwachung
+	\item Handshake-Protokoll (Request/Acknoledgement)
+\end{itemize}
+
+Bei großen Schaltungen wird meistens die Globally-Asynchron-Locally-Synchron (GALS) Methodik benutzt. Hier werden synchrone Inseln mit asynchroner Technik verbunden.
+
+\section{Dynamische Rekonfiguration}
+Meist auf Field Programmable Gate Array-Chips (FPGA) realisiert und für Hardware-Beschleuniger benutzt.\\
+tightly coupled (in CPU-Pfad) $\Leftrightarrow$ loosely coupled (außerhalb)\\
+\\
+Lookuptable (LUT): Speichern Ausgangswerte unabhängig von Eingangswerten\\
+Configurable Logic Block (CLB): Block von der die Logik rekonfiguriert werden kann\\
+%TODO Bild CLB
+
+Nachteile:
+\begin{itemize}
+	\item Großer Overhead
+	\item Große kapazitive Last und somit hohe Verlustleistung und geringere maximale Taktfrequenz
+\end{itemize}
+
+Das Ergebnis der Timinganalyse kann sich zwischen Pre- und Post-Layout durch Verdrahtung etc. unterscheiden.\\
+Bei Timingverletzungen müssen zusätzliche Pipelinestufen eingefügt werden (evtl. durch Hyperregister in Switch-Box)\\
+Pipelining in Rückkopplungsschleifen:\\
+%TODO Bild einfügen
+
+Partiell rekonfigurierbare Region (PRR) kann mehrere rekonfigurierbare Module (RM) enthalten\\
+Alle statischen Leitungen in PRR müssen in allen RM vorkommen!\\
+
 
 
 
