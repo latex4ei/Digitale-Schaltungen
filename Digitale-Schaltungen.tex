@@ -43,66 +43,65 @@
 $I_F = I_{ES}\left(\exp\left(\frac{U_{BE}}{U_T}\right)-1\right)$\\
 Vorteil: bessere Treiberverstärkung durch Exponentialfunktion
 Nachteile:\begin{itemize}
-	\item hohe Verlustleistung
-	\item langsames Abschalten durch Sättigung mit Ladungsträgern $\rightarrow$ ECL-Schaltung / Differentielles ECL / Feedback-ECL Differenzverstärker
+    \item hohe Verlustleistung
+    \item langsames Abschalten durch Sättigung mit Ladungsträgern $\rightarrow$ ECL-Schaltung / Differentielles ECL / Feedback-ECL Differenzverstärker
 \end{itemize}
 
 \subsection{MOS-Transistoren}
- 
+
 Verstärkung: \framebox{
-	$\beta = K' \frac{W}{L} \text{ mit } K' = \frac{\mu \varepsilon_{ox} \varepsilon_0}{t_{0x}} \qquad [\beta]=\frac{A}{V^2}$ 
+    $\beta = K' \frac{W}{L} \text{ mit } K' = \frac{\mu \varepsilon_{ox} \varepsilon_0}{t_{0x}} \qquad [\beta]=\frac{A}{V^2}$
 } \\
 \begin{tabular} {r | l}
-	Kanalweite & W  \\
-	Kanallänge & L  \\
-	Elektronenbeweglichkeit & $\mu_n \approx 250 \cdot 10^{-4} \frac{m^2}{Vs}$\\
-	 & $\mu_p \approx 100 \cdot 10^{-4} \frac{m^2}{Vs}$ \\
-	rel. Dielektrizität des Gateoxyds & $\varepsilon_{ox} \approx 3,9$ \\
-	Dielektrizitätskonstante & $\varepsilon_0 = 8.8541878 \cdot 10^{-12} \frac{\mathrm{A\,s}}{\mathrm{V\,m}}$ \\
-	Gateoxyddicke & $t_{ox}$ \\
-	Verstärkung & $\beta = \frac{\mu_n \varepsilon_{ox} \varepsilon_0}{t_{ox}} \cdot \frac{W}{L} = K' \frac{W}{L}$ \\
-	Kapazität & $C_G = \varepsilon_{ox} \varepsilon_0 \frac{WL}{t_{ox}}$ \\
-	Verzögerungszeit & $t_{pHL} \propto \frac{C_L t_{ox} L_p}{W_p \mu_p \varepsilon_{ox} (V_{DD} - |V_{th}|)}$ \\
+    Kanalweite                        & W                                                                                                \\
+    Kanallänge                        & L                                                                                                \\
+    Elektronenbeweglichkeit           & $\mu_n \approx 250 \cdot 10^{-4} \frac{m^2}{Vs}$                                                 \\
+                                      & $\mu_p \approx 100 \cdot 10^{-4} \frac{m^2}{Vs}$                                                 \\
+    rel. Dielektrizität des Gateoxyds & $\varepsilon_{ox} \approx 3,9$                                                                   \\
+    Dielektrizitätskonstante          & $\varepsilon_0 = 8.8541878 \cdot 10^{-12} \frac{\mathrm{A\,s}}{\mathrm{V\,m}}$                   \\
+    Gateoxyddicke                     & $t_{ox}$                                                                                         \\
+    Verstärkung                       & $\beta = \frac{\mu_n \varepsilon_{ox} \varepsilon_0}{t_{ox}} \cdot \frac{W}{L} = K' \frac{W}{L}$ \\
+    Kapazität                         & $C_G = \varepsilon_{ox} \varepsilon_0 \frac{WL}{t_{ox}}$                                         \\
+    Verzögerungszeit                  & $t_{pHL} \propto \frac{C_L t_{ox} L_p}{W_p \mu_p \varepsilon_{ox} (V_{DD} - |V_{th}|)}$          \\
 \end{tabular}
 \begin{itemize}
-	\item große Kanalweite $\Ra$ große Drain-Störme \\ $\Ra$ schnelle Schaltgeschwindigkeit (da $i_d \propto \beta \propto \frac{W}{L}$) \\
-	Aber: große Fläche.
-	\item nMos schaltet schneller als pMOS, da nMOS und pMOS unterschiedliche Majoritätsladungsträger haben. Die Beweglichkeit der Löcher ist im Allgemeinen geringer als die der Elektronen. 
-	\item nMOS zum Entladen, pMOS zum Aufladen
+    \item große Kanalweite $\Ra$ große Drain-Störme \\ $\Ra$ schnelle Schaltgeschwindigkeit (da $i_d \propto \beta \propto \frac{W}{L}$) \\
+          Aber: große Fläche.
+    \item nMos schaltet schneller als pMOS, da nMOS und pMOS unterschiedliche Majoritätsladungsträger haben. Die Beweglichkeit der Löcher ist im Allgemeinen geringer als die der Elektronen.
+    \item nMOS zum Entladen, pMOS zum Aufladen
 \end{itemize}
 
 \textbf{nMos} (p-dotiertes Substrat, n-dotierte Drain/Source), schlechter pull up (Pegeldegenerierung)
 \begin{equation*}
-\!\!\! I_d = \begin{cases}
-0, &\text{ für }  U_{gs} - U_{th} \le 0\\[0.2em]
-\beta [(u_{gs} - U_{th}) \cdot u_{ds} - \frac{1}{2} u_{ds}^2] , &\text{ für }  0 \le U_{gs} - U_{th} \ge u_{ds}\\\\[0.2em]
-\frac{1}{2} \beta \cdot (u_{gs} - U_{th})^2, &\text{ für }  0 \le U_{gs} - U_{th} \le u_{ds}\\
-\end{cases}
+    \!\!\! I_d = \begin{cases}
+        0,                                                              & \text{ für }  U_{gs} - U_{th} \le 0            \\[0.2em]
+        \beta [(u_{gs} - U_{th}) \cdot u_{ds} - \frac{1}{2} u_{ds}^2] , & \text{ für }  0 \le U_{gs} - U_{th} \ge u_{ds} \\\\[0.2em]
+        \frac{1}{2} \beta \cdot (u_{gs} - U_{th})^2,                    & \text{ für }  0 \le U_{gs} - U_{th} \le u_{ds} \\
+    \end{cases}
 \end{equation*}
 \textbf{pMos} (n-dotiertes Substrat, p-dotierte Drain/Source), schlechter pull down (Pegeldegenerierung)
 \begin{equation*}
-\!\!\! I_d = \begin{cases}
-0, &\text{ für }  U_{gs} - U_{th} \ge 0\\[0.2em]
-- \beta [(u_{gs} - U_{th}) \cdot u_{ds} - \frac{1}{2} u_{ds}^2] , &\text{ für }  0 \ge U_{gs} - U_{th} \le u_{ds}\\\\[0.2em]
-- \frac{1}{2} \beta \cdot (u_{gs} - U_{th})^2, &\text{ für }  0 \ge U_{gs} - U_{th} \ge u_{ds}\\
-
-\end{cases}
+    \!\!\! I_d = \begin{cases}
+        0,                                                                & \text{ für }  U_{gs} - U_{th} \ge 0            \\[0.2em]
+        - \beta [(u_{gs} - U_{th}) \cdot u_{ds} - \frac{1}{2} u_{ds}^2] , & \text{ für }  0 \ge U_{gs} - U_{th} \le u_{ds} \\\\[0.2em]
+        - \frac{1}{2} \beta \cdot (u_{gs} - U_{th})^2,                    & \text{ für }  0 \ge U_{gs} - U_{th} \ge u_{ds} \\
+    \end{cases}
 \end{equation*}
 
 \section{Sequentielle Logik}
 
 \begin{tabular}{rl}
-	$t_{\text{Setup}}$ & Stabilitätszeit vor der aktiven Taktflanke\\
-	$t_{\text{hold}}$ & Stabilitätszeit nach  der aktiven Taktflanke\\
-	$t_{\text{c2q}}$ & Eingang spätestens nach $t_{c2q}$ am Ausgang verfügbar\\
-	Min. Taktperiode &  $t_{clk} \ge t_{1,c2q} + t_{logic,max} + t_{2,setup}$ \\
-	 & (bei Verletzung: neue Pipelinestufe\\
-	 & aber dadurch höhere Latenz) \\
-	Max. Taktfrequenz & $f_{max} = \left\lfloor \frac{1}{t_{clk}} \right\rfloor$ \qquad (Nicht aufrunden) \\
-	Holdzeitbedingung & $t_{hold} \le t_{c2q} + t_{logic,min}$\\
-	 & (bei Verletzung zwei Inverter einfügen)\\
-	Durchsatz & $\frac{1 \text{Sample}}{t_{clk,pipe}} = f$ \\
-	Latenz & $t_{clk} \cdot \#$Pipelinestufen (das zwischen den FFs) \\
+    $t_{\text{Setup}}$ & Stabilitätszeit vor der aktiven Taktflanke                                        \\
+    $t_{\text{hold}}$  & Stabilitätszeit nach  der aktiven Taktflanke                                      \\
+    $t_{\text{c2q}}$   & Eingang spätestens nach $t_{c2q}$ am Ausgang verfügbar                            \\
+    Min. Taktperiode   & $t_{clk} \ge t_{1,c2q} + t_{logic,max} + t_{2,setup}$                             \\
+                       & (bei Verletzung: neue Pipelinestufe                                               \\
+                       & aber dadurch höhere Latenz)                                                       \\
+    Max. Taktfrequenz  & $f_{max} = \left\lfloor \frac{1}{t_{clk}} \right\rfloor$ \qquad (Nicht aufrunden) \\
+    Holdzeitbedingung  & $t_{hold} \le t_{c2q} + t_{logic,min}$                                            \\
+                       & (bei Verletzung zwei Inverter einfügen)                                           \\
+    Durchsatz          & $\frac{1 \text{Sample}}{t_{clk,pipe}} = f$                                        \\
+    Latenz             & $t_{clk} \cdot \#$Pipelinestufen (das zwischen den FFs)                           \\
 \end{tabular}
 
 \subsection{Zeitmessungen}
@@ -127,9 +126,9 @@ Zeit, die beim Umschalten eines Signals von 10\% auf 90\% vergeht
 Umladen von parasitären Lastkapazitäten braucht Zeit.
 Diese setzen sich wie folgt zusammen:
 \begin{itemize}
-	\item Eingangs/Gate-Kapazität der nachfolgenden Stufe
-	\item Drain-Kapazität
-	\item Leiterbahn-Kapazitäten
+    \item Eingangs/Gate-Kapazität der nachfolgenden Stufe
+    \item Drain-Kapazität
+    \item Leiterbahn-Kapazitäten
 \end{itemize}
 
 \subsubsection{Elmore-Delay}
@@ -140,12 +139,12 @@ Beispiel: $\tau = R_C\cdot C_2 + (R_C+R_B)C_1+(R_C+R_B+R_A)C_L$
 \subsection{Pipelining} % (fold)
 Nur bei synchronen(taktgesteuerten) Schaltungen möglich!
 \begin{itemize} \itemsep0pt
-	\item Aufteilen langer kombinatorischer Pfade durch Einfügen zusätzlicher Registerstufen\\
-	$\ra$ Möglichst Halbierung des längsten Pfades
-	\item Zeitverhalten beachten (evtl. Dummy-Gatter einfügen)
-	\item Durchsatz erhöht sich entsprechend der Steigerung der Taktfrequenz
-	\item Gesamtlatenz wird eher größer
-	\item Taktfrequenz erhöht sich
+    \item Aufteilen langer kombinatorischer Pfade durch Einfügen zusätzlicher Registerstufen\\
+          $\ra$ Möglichst Halbierung des längsten Pfades
+    \item Zeitverhalten beachten (evtl. Dummy-Gatter einfügen)
+    \item Durchsatz erhöht sich entsprechend der Steigerung der Taktfrequenz
+    \item Gesamtlatenz wird eher größer
+    \item Taktfrequenz erhöht sich
 \end{itemize}
 
 \subsection{Latch}
@@ -160,12 +159,12 @@ XXX
 \section{Pass-Transistor-Logik}
 
 \begin{tablebox}{l|l}
-	Vorteile & Nachteile\\
-	\brule
-	Wenige Transistoren & zusätzliche Inverter\\
-	& oder Transmission Gates für Pegelregeneration\\
-	Kleiner Flächenverbrauch & Verdrahtungsaufwand hoch\\
-	Geringe Verlustleistung & Langsam
+    Vorteile & Nachteile\\
+    \brule
+    Wenige Transistoren & zusätzliche Inverter\\
+    & oder Transmission Gates für Pegelregeneration\\
+    Kleiner Flächenverbrauch & Verdrahtungsaufwand hoch\\
+    Geringe Verlustleistung & Langsam
 \end{tablebox}
 
 \subsection{Erweitertes KV-Diagramm}
@@ -177,11 +176,11 @@ Einträge (0 oder 1) des KV-Diagramms werden durch die jeweilige DNF für den Ei
 \section{Dynamische CMOS-Schaltungen}
 
 \begin{tablebox}{l|l}
-	Vorteile & Nachteile\\
-	\brule
-	Nur ein Logikblock & Ladungsverlust durch Leckströme und\\
-	statt zwei benötigt & und Charge-Sharing\\
-	
+    Vorteile & Nachteile\\
+    \brule
+    Nur ein Logikblock & Ladungsverlust durch Leckströme und\\
+    statt zwei benötigt & und Charge-Sharing\\
+
 \end{tablebox}
 
 Damit die Pegelregeneration gewährleistet ist, sollten Gatter immer abwechselnd mit NMOS und PMOS-Technik kaskadiert werden. Alternativ kann auch ein statische Schaltung benutzt werden.
@@ -199,14 +198,14 @@ Inverterschaltvorgang $V_A: 0 \ra 1$:\\
 \includegraphics{img/ds/char_inverter.pdf}
 
 \subsection{Dynamische Verlustleistung}
- \qquad \ $P_{dyn} = P_{cap} + P_{short}$\\
+\qquad \ $P_{dyn} = P_{cap} + P_{short}$\\
 \begin{tabular}{ll}
-	\quad Kapazitive Verluste \qquad \ \quad \ & $P_{cap} = \alpha_{01} f C_L V_{DD}^2$\\
-	\quad Kurzschlussstrom	& $P_{short} = \alpha_{01} f \beta_n \tau (V_{DD} - 2V_{tn})^3$\\[0.8em]
-	\quad Schalthäufigkeit & $\alpha_{0 \rightarrow 1} = \frac{\text{Schaltvorgänge(pos. Flanke)}}{\text{\# Betrachtete Takte}}$\\
-	\quad Schalthäufigkeit (periodisch) & $\alpha = \frac{f_\text{switch}}{f_\text{clk}}$\\
+    \quad Kapazitive Verluste \qquad \ \quad \  & $P_{cap} = \alpha_{01} f C_L V_{DD}^2$                                                              \\
+    \quad Kurzschlussstrom                      & $P_{short} = \alpha_{01} f \beta_n \tau (V_{DD} - 2V_{tn})^3$                                       \\[0.8em]
+    \quad Schalthäufigkeit                      & $\alpha_{0 \rightarrow 1} = \frac{\text{Schaltvorgänge(pos. Flanke)}}{\text{\# Betrachtete Takte}}$ \\
+    \quad Schalthäufigkeit (periodisch)         & $\alpha = \frac{f_\text{switch}}{f_\text{clk}}$                                                     \\
 \end{tabular}\\
-Abhängig von den Signalflanken, mit Schaltfunktionen verknüpft\\ 
+Abhängig von den Signalflanken, mit Schaltfunktionen verknüpft\\
 $\approx \;$ $V_{DD} 1/\propto $ Schaltzeit: $\frac{V_{DD2}}{V_{DD1}} = \frac{t_{D1}}{t_{D2}}$ (bei Schaltnetzen $t_{log}$)\\
 \textbf{Verzögerungszeit} $\propto$ $\frac{C_Lt_{ox}L_p}{W_p\mu_p\varepsilon(V_{DD} - V_{th})}$
 
@@ -222,9 +221,9 @@ $I_{\text{Gate}} \sim \exp\left(t_{\text{ox}}^{-1}\right)$\\
 \\
 Optimierung durch:
 \begin{itemize}
-	\item Clock-Gating: Nicht benötigte Blöcke können innerhalb einer Taktflanke an- und abgeschaltet werden
-	\item Power-Gating: Nicht benötigte Bereiche können abgeschaltet werden, Daten müssen jedoch zuvor abgespeichert werden
-	\item Dynamic Voltage Frequency Scaling: Versorgungsspannung und Frequenz $\downarrow \Rightarrow$ Dynamic Power $\downarrow$
+    \item Clock-Gating: Nicht benötigte Blöcke können innerhalb einer Taktflanke an- und abgeschaltet werden
+    \item Power-Gating: Nicht benötigte Bereiche können abgeschaltet werden, Daten müssen jedoch zuvor abgespeichert werden
+    \item Dynamic Voltage Frequency Scaling: Versorgungsspannung und Frequenz $\downarrow \Rightarrow$ Dynamic Power $\downarrow$
 \end{itemize}
 
 Die Schwellspannung kann durch Substratvorspannung (Bulk) verändert werden
@@ -242,16 +241,16 @@ TODO
 Elektronen werden durch eine hohe Spannung am Gate und Drain auf das Floating-Gate gezogen. Zur Speicherung wird keine Spannung benötigt. Beim Lesen mit mittlerer Spannung verschieben die Elektronen im Floating-Gate die Thresholdspannung.\\
 Das Oxid wird beim Laden/Entladen beschädigt (geringe Lebenszeit), deswegen muss die Nutzung auf allen Speicherzellen verteilt werden.
 \subsection{Phase-Change-Memory}
-Bei Raumtemperatur kann das Phase-Change-Material sich bei Raumtemperatur stabil in zwei Zuständen befinden: Amorph und Kristallin. Die Zustände können durch eine Reset(Melt)temperatur bzw. der Crystaltemperatur gewechselt werden. 
+Bei Raumtemperatur kann das Phase-Change-Material sich bei Raumtemperatur stabil in zwei Zuständen befinden: Amorph und Kristallin. Die Zustände können durch eine Reset(Melt)temperatur bzw. der Crystaltemperatur gewechselt werden.
 
 %TODO Bild
 
 \section{Fehlertoleranz}
 Es können verschiedene Fehler entstehen:
 \begin{itemize}
-	\item Manufacturing Variability ($V_T$)
-	\item Soft-Errors (Fehler, die auftreten und wieder verschwinden)
-	\item Alterung und Transistorperformanz (langsamer werdend)
+    \item Manufacturing Variability ($V_T$)
+    \item Soft-Errors (Fehler, die auftreten und wieder verschwinden)
+    \item Alterung und Transistorperformanz (langsamer werdend)
 \end{itemize}
 
 Fehlermodelle:\\
@@ -271,52 +270,52 @@ Single Event Upset: Übernahme eines falschen Wertes durch Umkippen in ein FlipF
 Taktverteilung meistens durch H-Baumstruktur, um alle Register in gleicher Zeit zu erreichen.\\
 Taktabweichungen durch:
 \begin{itemize}
-	\item Clock-Generation
-	\item Devices
-	\item Interconnect
-	\item Temperatur
-	\item Kapazitive Lasten
-	\item Koppelkapazität zu benachbarten Leitungen
+    \item Clock-Generation
+    \item Devices
+    \item Interconnect
+    \item Temperatur
+    \item Kapazitive Lasten
+    \item Koppelkapazität zu benachbarten Leitungen
 \end{itemize}
 
 \begin{tablebox}{l|l}
-	Clock-Skew & Clock-Jitter\\
-	\brule
-	Örtlicher Unterschied & Zeitliche Unterschiede \\
-	zw. Regionen & zw. aufeinanderfolgenden Taktflanken\\
-	\hline
-	Einsatz zur Verteilung der Stromlast & \\
-	auf größeren Zeitraum & \\
-	$\Rightarrow$ Verkleinerung des IR-Drops & \\
-	\hline
-	Ausgleich von Unterschieden & \\
-	bei Pipelinestufen & \\
+    Clock-Skew & Clock-Jitter\\
+    \brule
+    Örtlicher Unterschied & Zeitliche Unterschiede \\
+    zw. Regionen & zw. aufeinanderfolgenden Taktflanken\\
+    \hline
+    Einsatz zur Verteilung der Stromlast & \\
+    auf größeren Zeitraum & \\
+    $\Rightarrow$ Verkleinerung des IR-Drops & \\
+    \hline
+    Ausgleich von Unterschieden & \\
+    bei Pipelinestufen & \\
 \end{tablebox}
 
 \subsection{Asynchrone Schaltungen}
 Wie kann man einen sinnvollen Zeitpunkt finden um das Ergebnis aus einem asynchronen Zweig in ein Register zu übernehmen?\\
 \begin{itemize}
-	\item Delay-Modul mit fester Zeit (start/done)\\
-	\item Handshake-Protokoll mit redundanter Codierung (aber ständiger Querstrom!)
-	\item Handshake-Protokoll mit Stromsensor (falls kein Strom mehr fließt $\rightarrow$ Schaltung fertig)
+    \item Delay-Modul mit fester Zeit (start/done)\\
+    \item Handshake-Protokoll mit redundanter Codierung (aber ständiger Querstrom!)
+    \item Handshake-Protokoll mit Stromsensor (falls kein Strom mehr fließt $\rightarrow$ Schaltung fertig)
 \end{itemize}
 
 \subsection{Kombination von asynchronen und synchronen Schaltungen}
 
 \begin{tablebox}{l|l}
-	Synchrone Schaltung & Asynchrone Schaltung\\
-	\brule
-	+ einfache Timing-Analyse & + schneller \\
-	+ einfache Verifikation & + keine glob. Taktverteilung\\
-	\hline
-	- glob. Taktverteilung & - schwierige Verifikation\\
-	 & - keine Timing-Analyse\\
+    Synchrone Schaltung & Asynchrone Schaltung\\
+    \brule
+    + einfache Timing-Analyse & + schneller \\
+    + einfache Verifikation & + keine glob. Taktverteilung\\
+    \hline
+    - glob. Taktverteilung & - schwierige Verifikation\\
+    & - keine Timing-Analyse\\
 \end{tablebox}
 
 Synchronisierung durch:
 \begin{itemize}
-	\item asynchroner FIFO-Speicher mit Füllstandsüberwachung
-	\item Handshake-Protokoll (Request/Acknoledgement)
+    \item asynchroner FIFO-Speicher mit Füllstandsüberwachung
+    \item Handshake-Protokoll (Request/Acknoledgement)
 \end{itemize}
 
 Bei großen Schaltungen wird meistens die Globally-Asynchron-Locally-Synchron (GALS) Methodik benutzt. Hier werden synchrone Inseln mit asynchroner Technik verbunden.
@@ -331,8 +330,8 @@ Configurable Logic Block (CLB): Block von der die Logik rekonfiguriert werden ka
 
 Nachteile:
 \begin{itemize}
-	\item Großer Overhead
-	\item Große kapazitive Last und somit hohe Verlustleistung und geringere maximale Taktfrequenz
+    \item Großer Overhead
+    \item Große kapazitive Last und somit hohe Verlustleistung und geringere maximale Taktfrequenz
 \end{itemize}
 
 Das Ergebnis der Timinganalyse kann sich zwischen Pre- und Post-Layout durch Verdrahtung etc. unterscheiden.\\
